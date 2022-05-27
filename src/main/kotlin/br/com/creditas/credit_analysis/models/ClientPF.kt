@@ -1,5 +1,6 @@
 package br.com.creditas.credit_analysis.models
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.DynamicUpdate
 import java.util.*
 import javax.persistence.*
@@ -24,5 +25,6 @@ data class ClientPF(
     val birthDate: Date,
 
     @OneToOne(mappedBy = "client")
+    @JsonManagedReference
     val address: Address? = null
 )

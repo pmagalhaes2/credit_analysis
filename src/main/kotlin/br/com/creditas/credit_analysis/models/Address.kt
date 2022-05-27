@@ -1,5 +1,6 @@
 package br.com.creditas.credit_analysis.models
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.DynamicUpdate
 import java.util.*
 import javax.persistence.*
@@ -12,6 +13,7 @@ data class Address(
 
     @OneToOne
     @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @JsonBackReference
     val client: ClientPF,
 
     @Column(name = "street")
