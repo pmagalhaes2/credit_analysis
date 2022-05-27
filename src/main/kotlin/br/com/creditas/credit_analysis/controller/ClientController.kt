@@ -7,11 +7,10 @@ import br.com.creditas.credit_analysis.repositories.ClientRepository
 import br.com.creditas.credit_analysis.requests.AddressDto
 import br.com.creditas.credit_analysis.requests.ClientCreationRequest
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
+import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/accounts")
@@ -58,4 +57,13 @@ class ClientController(
         )
         return response
     }
+
+    @GetMapping
+    fun read() = ResponseEntity.ok(clientRepository.findAll())
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: UUID): ResponseEntity<Optional<ClientPF>> {
+        return ResponseEntity.ok(clientRepository.findById(id))
+    }
+
 }
