@@ -1,7 +1,8 @@
 package br.com.creditas.credit_analysis.responses
 
 import br.com.creditas.credit_analysis.requests.AddressDto
-import java.util.*
+import java.util.UUID
+import java.util.Date
 
 data class ClientCreationResponse(
     val id: UUID,

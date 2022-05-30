@@ -3,7 +3,11 @@ package br.com.creditas.credit_analysis.models
 import com.fasterxml.jackson.annotation.JsonBackReference
 import org.hibernate.annotations.DynamicUpdate
 import java.util.*
-import javax.persistence.*
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.OneToOne
+import javax.persistence.JoinColumn
+import javax.persistence.Column
 
 @Entity
 @DynamicUpdate
