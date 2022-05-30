@@ -1,6 +1,6 @@
 package br.com.creditas.credit_analysis.requests
 
-import java.util.*
+import java.util.Date
 
 data class ClientCreationRequest(
     val cpf: String,

@@ -2,8 +2,14 @@ package br.com.creditas.credit_analysis.models
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.DynamicUpdate
-import java.util.*
-import javax.persistence.*
+import java.util.UUID
+import java.util.Date
+import javax.persistence.Entity
+import javax.persistence.Table
+import javax.persistence.Id
+import javax.persistence.Column
+import javax.persistence.OneToOne
+
 
 @Entity
 @Table(name = "client_pf")
