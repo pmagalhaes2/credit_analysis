@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.http.ResponseEntity
 import java.util.UUID
 import java.util.Optional
@@ -72,4 +73,8 @@ class ClientController(
         return ResponseEntity.ok(clientRepository.findById(id))
     }
 
+    @GetMapping("/find")
+    fun getByCpf(@RequestParam cpf: String): ResponseEntity<Optional<ClientPF>> {
+        return ResponseEntity.ok(clientRepository.findByCpf(cpf))
+    }
 }
