@@ -7,14 +7,9 @@ import br.com.creditas.credit_analysis.repositories.ClientRepository
 import br.com.creditas.credit_analysis.requests.AddressDto
 import br.com.creditas.credit_analysis.requests.ClientCreationRequest
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
+import org.springframework.web.bind.annotation.*
 import java.util.UUID
 import java.util.Optional
 
@@ -72,4 +67,8 @@ class ClientController(
         return ResponseEntity.ok(clientRepository.findById(id))
     }
 
+    @GetMapping("/find")
+    fun getByCpf(@RequestParam cpf: String): ResponseEntity<Optional<ClientPF>> {
+        return ResponseEntity.ok(clientRepository.findByCpf(cpf))
+    }
 }
