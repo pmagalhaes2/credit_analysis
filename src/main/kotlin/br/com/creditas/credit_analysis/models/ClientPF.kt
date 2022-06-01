@@ -9,6 +9,7 @@ import javax.persistence.Table
 import javax.persistence.Id
 import javax.persistence.Column
 import javax.persistence.OneToOne
+import javax.persistence.OneToMany
 
 
 @Entity
@@ -32,5 +33,9 @@ data class ClientPF(
 
     @OneToOne(mappedBy = "client")
     @JsonManagedReference
-    val address: Address? = null
+    val address: Address? = null,
+
+    @OneToMany(mappedBy = "client")
+    @JsonManagedReference
+    val contacts: List<Contact> = ArrayList()
 )

@@ -2,10 +2,13 @@ package br.com.creditas.credit_analysis.controller
 
 import br.com.creditas.credit_analysis.models.Address
 import br.com.creditas.credit_analysis.models.ClientPF
+import br.com.creditas.credit_analysis.models.Contact
 import br.com.creditas.credit_analysis.repositories.AddressRepository
 import br.com.creditas.credit_analysis.repositories.ClientRepository
+import br.com.creditas.credit_analysis.repositories.ContactRepository
 import br.com.creditas.credit_analysis.requests.AddressDto
 import br.com.creditas.credit_analysis.requests.ClientCreationRequest
+import br.com.creditas.credit_analysis.requests.ContactDto
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.RestController
@@ -25,7 +28,8 @@ import java.util.Optional
 @RequestMapping("/accounts")
 class ClientController(
     private val clientRepository: ClientRepository,
-    private val addressRepository: AddressRepository
+    private val addressRepository: AddressRepository,
+    private val contactRepository: ContactRepository
 ) {
 
     @PostMapping
@@ -50,6 +54,15 @@ class ClientController(
             )
         ) else null
 
+        val contactEntity = if (clientRequest.contact != null) contactRepository.save(
+            Contact(
+                type = clientRequest.contact.type,
+                phoneNumber = clientRequest.contact.phoneNumber,
+                emailAddress = clientRequest.contact.email,
+                client = clientEntity
+            )
+        ) else null
+
         val response = ClientCreationResponse(
             id = savedClient.id,
             cpf = savedClient.cpf,
@@ -61,6 +74,11 @@ class ClientController(
                 street = addressEntity.street,
                 city = addressEntity.city,
                 state = addressEntity.state
+            ) else null,
+            contact = if (contactEntity != null) ContactDto(
+                type = contactEntity.type,
+                phoneNumber = contactEntity.phoneNumber,
+                email = contactEntity.emailAddress
             ) else null
 
         )
