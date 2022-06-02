@@ -94,7 +94,7 @@ class ClientController(
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: UUID): ResponseEntity<ClientPF> {
-        return ResponseEntity.ok(clientRepository.findByClientId(id))
+        return ResponseEntity.ok(clientRepository.findByid(id))
     }
 
     @GetMapping("/find")
@@ -107,7 +107,7 @@ class ClientController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClient(@PathVariable id: UUID) {
-        clientRepository.findByClientId(id)?. let {
+        clientRepository.findByid(id)?. let {
             clientRepository.deleteById(id)
         } ?: throw NotFoundException(notFoundMessage)
     }
