@@ -23,7 +23,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import java.util.UUID
-import java.util.Optional
 
 @RestController
 @RequestMapping("/accounts")
@@ -90,13 +89,13 @@ class ClientController(
     fun read() = ResponseEntity.ok(clientRepository.findAll())
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<Optional<ClientPF>> {
-        return ResponseEntity.ok(clientRepository.findById(id))
+    fun getById(@PathVariable id: UUID): ResponseEntity<ClientPF> {
+        return ResponseEntity.ok(clientRepository.findByClientId(id))
     }
 
     @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
-    fun getByCpf(@RequestParam cpf: String): ClientPF {
+    fun getByCpf(@RequestParam cpf: String): ClientPF? {
         return clientRepository.findByCpf(cpf)
     }
 
