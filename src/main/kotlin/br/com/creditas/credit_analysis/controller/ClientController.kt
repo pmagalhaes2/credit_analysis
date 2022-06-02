@@ -1,5 +1,6 @@
 package br.com.creditas.credit_analysis.controller
 
+import br.com.creditas.credit_analysis.exceptions.NotFoundException
 import br.com.creditas.credit_analysis.models.Address
 import br.com.creditas.credit_analysis.models.ClientPF
 import br.com.creditas.credit_analysis.models.Contact
@@ -11,6 +12,7 @@ import br.com.creditas.credit_analysis.requests.ClientCreationRequest
 import br.com.creditas.credit_analysis.requests.ContactDto
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,10 +28,12 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/accounts")
+@ControllerAdvice
 class ClientController(
     private val clientRepository: ClientRepository,
     private val addressRepository: AddressRepository,
-    private val contactRepository: ContactRepository
+    private val contactRepository: ContactRepository,
+    private val notFoundMessage: String = "Cliente não encontrado!"
 ) {
 
     @PostMapping
@@ -103,13 +107,17 @@ class ClientController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClient(@PathVariable id: UUID) {
-        clientRepository.deleteById(id)
+        clientRepository.findByClientId(id)?. let {
+            clientRepository.deleteById(id)
+        } ?: throw NotFoundException(notFoundMessage)
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClientByCpf(@RequestParam cpf: String) {
-        clientRepository.deleteByCpf(cpf)
+        clientRepository.findByCpf(cpf) ?.let {
+            clientRepository.deleteByCpf(cpf)
+        } ?: throw NotFoundException(notFoundMessage)
     }
 }
