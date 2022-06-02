@@ -7,6 +7,7 @@ import java.util.UUID
 
 @Repository
 interface ClientRepository: JpaRepository<ClientPF, UUID> {
+  
     fun findByCpf(cpf: String): ClientPF?
 
     fun findByid(id: UUID): ClientPF?
