@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import java.util.UUID
 import java.util.Optional
@@ -97,5 +98,19 @@ class ClientController(
     @ResponseStatus(HttpStatus.OK)
     fun getByCpf(@RequestParam cpf: String): ClientPF {
         return clientRepository.findByCpf(cpf)
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    fun deleteClient(@PathVariable id: UUID) {
+        clientRepository.deleteById(id)
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    fun deleteClientByCpf(@RequestParam cpf: String) {
+        clientRepository.deleteByCpf(cpf)
     }
 }
