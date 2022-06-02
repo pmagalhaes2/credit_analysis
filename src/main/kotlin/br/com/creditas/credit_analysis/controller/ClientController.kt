@@ -100,7 +100,7 @@ class ClientController(
 
     @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
-    fun getByCpf(@RequestParam cpf: String): ClientPF {
+    fun getByCpf(@RequestParam cpf: String): ClientPF? {
         return clientRepository.findByCpf(cpf)
     }
 
