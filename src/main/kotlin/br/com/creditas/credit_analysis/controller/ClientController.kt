@@ -103,13 +103,17 @@ class ClientController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClient(@PathVariable id: UUID) {
-        clientRepository.deleteById(id)
+        clientRepository.findByClientId(id)?. let {
+            clientRepository.deleteById(id)
+        }
     }
 
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClientByCpf(@RequestParam cpf: String) {
-        clientRepository.deleteByCpf(cpf)
+        clientRepository.findByCpf(cpf) ?.let {
+            clientRepository.deleteByCpf(cpf)
+        }
     }
 }
