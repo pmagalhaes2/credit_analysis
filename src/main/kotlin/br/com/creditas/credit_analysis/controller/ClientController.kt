@@ -49,24 +49,28 @@ class ClientController(
 
         val savedClient = clientRepository.save(clientEntity)
 
-        val addressEntity = if (clientRequest.address != null) addressRepository.save(
-            Address(
-                street = clientRequest.address.street,
-                city = clientRequest.address.city,
-                state = clientRequest.address.state,
-                cep = clientRequest.address.cep,
-                client = clientEntity
+        val addressEntity = clientRequest.address?. let { address ->
+            addressRepository.save(
+                Address(
+                    street = clientRequest.address.street,
+                    city = clientRequest.address.city,
+                    state = clientRequest.address.state,
+                    cep = clientRequest.address.cep,
+                    client = clientEntity
+                )
             )
-        ) else null
+        }
 
-        val contactEntity = if (clientRequest.contact != null) contactRepository.save(
-            Contact(
-                type = clientRequest.contact.type,
-                phoneNumber = clientRequest.contact.phoneNumber,
-                emailAddress = clientRequest.contact.email,
-                client = clientEntity
+        val contactEntity = clientRequest.contact?. let { contact ->
+            contactRepository.save(
+                Contact(
+                    type = clientRequest.contact.type,
+                    phoneNumber = clientRequest.contact.phoneNumber,
+                    emailAddress = clientRequest.contact.email,
+                    client = clientEntity
+                )
             )
-        ) else null
+        }
 
         val response = ClientCreationResponse(
             id = savedClient.id,
@@ -74,18 +78,20 @@ class ClientController(
             name = savedClient.name,
             lastName = savedClient.lastName,
             birthDate = savedClient.birthDate,
-            address = if (addressEntity != null) AddressDto(
-                cep = addressEntity.cep,
-                street = addressEntity.street,
-                city = addressEntity.city,
-                state = addressEntity.state
-            ) else null,
-            contact = if (contactEntity != null) ContactDto(
-                type = contactEntity.type,
-                phoneNumber = contactEntity.phoneNumber,
-                email = contactEntity.emailAddress
-            ) else null
-
+            address = addressEntity?. let { address ->
+                AddressDto(
+                    cep = addressEntity.cep,
+                    street = addressEntity.street,
+                    city = addressEntity.city,
+                    state = addressEntity.state
+                ) },
+            contact = contactEntity?. let { contact ->
+                ContactDto(
+                    type = contactEntity.type,
+                    phoneNumber = contactEntity.phoneNumber,
+                    email = contactEntity.emailAddress
+                )
+            }
         )
         return response
     }
