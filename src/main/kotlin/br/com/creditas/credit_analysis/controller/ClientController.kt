@@ -138,9 +138,9 @@ class ClientController(
 
         clientRepository.findByid(id)?.let {
 
-            var client = it
+            val client = it
 
-            var clientEntity = ClientPF(
+            val clientEntity = ClientPF(
                 id = client.id,
                 cpf = clientRequest.cpf,
                 name = clientRequest.name,
@@ -188,9 +188,9 @@ class ClientController(
 
         clientRepository.findByCpf(cpf)?.let {
 
-            var client = it
+            val client = it
 
-            var clientEntity = ClientPF(
+            val clientEntity = ClientPF(
                 id = client.id,
                 cpf = clientRequest.cpf,
                 name = clientRequest.name,
