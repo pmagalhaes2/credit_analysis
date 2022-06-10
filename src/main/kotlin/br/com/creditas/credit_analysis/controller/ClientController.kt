@@ -9,6 +9,7 @@ import br.com.creditas.credit_analysis.repositories.ClientRepository
 import br.com.creditas.credit_analysis.repositories.ContactRepository
 import br.com.creditas.credit_analysis.requests.AddressDto
 import br.com.creditas.credit_analysis.requests.ClientCreationRequest
+import br.com.creditas.credit_analysis.requests.ClientUpdateRequest
 import br.com.creditas.credit_analysis.requests.ContactDto
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
 import org.springframework.http.HttpStatus
@@ -23,9 +24,10 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 import java.util.UUID
-import java.util.Optional
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/accounts")
@@ -60,7 +62,6 @@ class ClientController(
                 )
             )
         }
-
         val contactEntity = clientRequest.contact?. let { contact ->
             contactRepository.save(
                 Contact(
@@ -85,7 +86,7 @@ class ClientController(
                     city = addressEntity.city,
                     state = addressEntity.state
                 ) },
-            contact = contactEntity?. let { contact ->
+            contact = contactEntity?. let {
                 ContactDto(
                     type = contactEntity.type,
                     phoneNumber = contactEntity.phoneNumber,
@@ -123,8 +124,107 @@ class ClientController(
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClientByCpf(@RequestParam cpf: String) {
-        clientRepository.findByCpf(cpf) ?.let {
+        clientRepository.findByCpf(cpf)?. let {
             clientRepository.deleteByCpf(cpf)
+        } ?: throw NotFoundException(notFoundMessage)
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    fun updateClientById(
+        @PathVariable id: UUID,
+        @RequestBody @Valid clientRequest: ClientUpdateRequest
+    ): ClientPF {
+
+        clientRepository.findByid(id)?.let {
+
+            var client = it
+
+            var clientEntity = ClientPF(
+                id = client.id,
+                cpf = clientRequest.cpf,
+                name = clientRequest.name,
+                lastName = clientRequest.lastName,
+                birthDate = clientRequest.birthDate
+            )
+
+            client.address?.let { address -> addressRepository.delete(address) }
+
+            val addressEntity = clientRequest.address?. let {
+                addressRepository.save(
+                    Address(
+                        street = clientRequest.address.street,
+                        city = clientRequest.address.city,
+                        state = clientRequest.address.state,
+                        cep = clientRequest.address.cep,
+                        client = client
+                    )
+                )
+            }
+
+            val contactEntity = clientRequest.contact?. let {
+                contactRepository.save(
+                    Contact(
+                        type = clientRequest.contact.type,
+                        phoneNumber = clientRequest.contact.phoneNumber,
+                        emailAddress = clientRequest.contact.email,
+                        client = client
+                    )
+                )
+            }
+
+            return clientRepository.save(clientEntity)
+
+        } ?: throw NotFoundException(notFoundMessage)
+    }
+
+
+    @PutMapping("/update")
+    @Transactional
+    fun updateClientByCpf(
+        @RequestParam cpf: String,
+        @RequestBody @Valid clientRequest: ClientUpdateRequest
+    ): ClientPF {
+
+        clientRepository.findByCpf(cpf)?.let {
+
+            var client = it
+
+            var clientEntity = ClientPF(
+                id = client.id,
+                cpf = clientRequest.cpf,
+                name = clientRequest.name,
+                lastName = clientRequest.lastName,
+                birthDate = clientRequest.birthDate
+            )
+
+            client.address?.let { address -> addressRepository.delete(address) }
+
+            val addressEntity = clientRequest.address?. let {
+                addressRepository.save(
+                    Address(
+                        street = clientRequest.address.street,
+                        city = clientRequest.address.city,
+                        state = clientRequest.address.state,
+                        cep = clientRequest.address.cep,
+                        client = client
+                    )
+                )
+            }
+
+            val contactEntity = clientRequest.contact?. let {
+                contactRepository.save(
+                    Contact(
+                        type = clientRequest.contact.type,
+                        phoneNumber = clientRequest.contact.phoneNumber,
+                        emailAddress = clientRequest.contact.email,
+                        client = client
+                    )
+                )
+            }
+
+            return clientRepository.save(clientEntity)
+
         } ?: throw NotFoundException(notFoundMessage)
     }
 }
