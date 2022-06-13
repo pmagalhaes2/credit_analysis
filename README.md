@@ -39,7 +39,9 @@ GET BY ID: [http://localhost:8080/accounts/{id}](http://localhost:8080/accounts/
 GET BY CPF: [http://localhost:8080/accounts/find?cpf={cpf}](http://localhost:8080/accounts/find?cpf={cpf})
 
 ### U - Update
+UPDATE BY ID: [http://localhost:8080/accounts/{id}](http://localhost:8080/accounts/{id})
 
+UPDATE BY CPF: [http://localhost:8080/accounts/update?cpf={cpf}](http://localhost:8080/accounts/update?cpf={cpf})
 
 ### D - Delete
 DELETE BY ID: [http://localhost:8080/accounts/{id}](http://localhost:8080/accounts/{id})
