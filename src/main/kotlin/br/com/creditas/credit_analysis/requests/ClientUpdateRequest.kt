@@ -7,6 +7,7 @@ import javax.validation.Valid
 import javax.validation.constraints.Pattern
 
 data class ClientUpdateRequest(
+    // regexp = "^[\\pL\\pM\\p{Zs}]+\$" -> validates if string matches anything in the Unicode letter category, matching diacritics and whitespace separators
     @field:CPF
     val cpf: String,
 

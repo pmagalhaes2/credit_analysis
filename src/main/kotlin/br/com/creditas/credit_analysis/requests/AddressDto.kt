@@ -4,6 +4,7 @@ import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
 data class AddressDto(
+    // regexp = "^[\\pL\\pM\\p{Zs}]+\$" -> validates if string matches anything in the Unicode letter category, matching diacritics and whitespace separators
     @field:Pattern(regexp = "^[\\pL\\pM\\p{Zs}]+\$")
     val street: String,
 
@@ -16,5 +17,5 @@ data class AddressDto(
 
     @field:Size(min = 8, max = 8)
     @field:Pattern(regexp = "^\\d*\$")
-    val cep: String
+    val cep: String,
 )

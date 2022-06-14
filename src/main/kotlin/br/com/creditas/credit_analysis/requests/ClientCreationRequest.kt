@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Pattern
 
 data class ClientCreationRequest(
+    // regexp = "^[\\pL\\pM\\p{Zs}]+\$" -> validates if string matches anything in the Unicode letter category, matching diacritics and whitespace separators
     @field:NotEmpty
     @field:CPF
     val cpf: String,
