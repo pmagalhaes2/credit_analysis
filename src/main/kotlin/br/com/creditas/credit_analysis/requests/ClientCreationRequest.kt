@@ -8,5 +8,5 @@ data class ClientCreationRequest(
     val lastName: String,
     val birthDate: Date,
     val address: AddressDto? = null,
-    val contact: ContactDto? = null
+    val contacts: List<ContactDto>? = null
 )
