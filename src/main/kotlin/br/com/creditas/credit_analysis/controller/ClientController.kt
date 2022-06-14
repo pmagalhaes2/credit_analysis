@@ -41,7 +41,7 @@ class ClientController(
 
     @PostMapping
     @Transactional
-    fun create(@RequestBody clientRequest: ClientCreationRequest): ClientCreationResponse {
+    fun create(@RequestBody @Valid clientRequest: ClientCreationRequest): ClientCreationResponse {
         val clientEntity = ClientPF(
             cpf = clientRequest.cpf,
             name = clientRequest.name,
@@ -51,7 +51,7 @@ class ClientController(
 
         val savedClient = clientRepository.save(clientEntity)
 
-        val addressEntity = clientRequest.address?. let { address ->
+        val addressEntity = clientRequest.address?.let { address ->
             addressRepository.save(
                 Address(
                     street = clientRequest.address.street,
@@ -62,12 +62,13 @@ class ClientController(
                 )
             )
         }
-        val contactEntity = clientRequest.contact?. let { contact ->
+
+        val contactEntity = clientRequest.contacts?.map { contact ->
             contactRepository.save(
                 Contact(
-                    type = clientRequest.contact.type,
-                    phoneNumber = clientRequest.contact.phoneNumber,
-                    emailAddress = clientRequest.contact.email,
+                    type = contact.type,
+                    phoneNumber = contact.phoneNumber,
+                    emailAddress = contact.email,
                     client = clientEntity
                 )
             )
@@ -79,19 +80,22 @@ class ClientController(
             name = savedClient.name,
             lastName = savedClient.lastName,
             birthDate = savedClient.birthDate,
-            address = addressEntity?. let { address ->
+            address = addressEntity?.let { address ->
                 AddressDto(
                     cep = addressEntity.cep,
                     street = addressEntity.street,
                     city = addressEntity.city,
                     state = addressEntity.state
-                ) },
-            contact = contactEntity?. let {
-                ContactDto(
-                    type = contactEntity.type,
-                    phoneNumber = contactEntity.phoneNumber,
-                    email = contactEntity.emailAddress
                 )
+            },
+            contacts = contactEntity?.let { contactList ->
+                contactList.map { contact ->
+                    ContactDto(
+                        type = contact.type,
+                        phoneNumber = contact.phoneNumber,
+                        email = contact.emailAddress
+                    )
+                }
             }
         )
         return response
@@ -162,12 +166,14 @@ class ClientController(
                 )
             }
 
-            val contactEntity = clientRequest.contact?. let {
+            client.contacts?.map { contact -> contactRepository.delete(contact) }
+
+            val contactEntity = clientRequest.contacts?.map { contact ->
                 contactRepository.save(
                     Contact(
-                        type = clientRequest.contact.type,
-                        phoneNumber = clientRequest.contact.phoneNumber,
-                        emailAddress = clientRequest.contact.email,
+                        type = contact.type,
+                        phoneNumber = contact.phoneNumber,
+                        emailAddress = contact.email,
                         client = client
                     )
                 )
@@ -200,7 +206,7 @@ class ClientController(
 
             client.address?.let { address -> addressRepository.delete(address) }
 
-            val addressEntity = clientRequest.address?. let {
+            val addressEntity = clientRequest.address?.let {
                 addressRepository.save(
                     Address(
                         street = clientRequest.address.street,
@@ -212,12 +218,14 @@ class ClientController(
                 )
             }
 
-            val contactEntity = clientRequest.contact?. let {
+            client.contacts?.map { contact -> contactRepository.delete(contact) }
+
+            val contactEntity = clientRequest.contacts?.map { contact ->
                 contactRepository.save(
                     Contact(
-                        type = clientRequest.contact.type,
-                        phoneNumber = clientRequest.contact.phoneNumber,
-                        emailAddress = clientRequest.contact.email,
+                        type = contact.type,
+                        phoneNumber = contact.phoneNumber,
+                        emailAddress = contact.email,
                         client = client
                     )
                 )
