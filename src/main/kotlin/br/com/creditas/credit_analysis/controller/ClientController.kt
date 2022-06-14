@@ -63,7 +63,7 @@ class ClientController(
             )
         }
 
-        val contactEntity = clientRequest.contacts?.map { contact ->
+        val contactEntities = clientRequest.contacts?.map { contact ->
             contactRepository.save(
                 Contact(
                     type = contact.type,
@@ -88,15 +88,13 @@ class ClientController(
                     state = addressEntity.state
                 )
             },
-            contacts = contactEntity?.let { contactList ->
-                contactList.map { contact ->
+            contacts = contactEntities?.map { contact ->
                     ContactDto(
                         type = contact.type,
                         phoneNumber = contact.phoneNumber,
                         email = contact.emailAddress
                     )
                 }
-            }
         )
         return response
     }
@@ -168,7 +166,7 @@ class ClientController(
 
             client.contacts?.map { contact -> contactRepository.delete(contact) }
 
-            val contactEntity = clientRequest.contacts?.map { contact ->
+            val contactEntities = clientRequest.contacts?.map { contact ->
                 contactRepository.save(
                     Contact(
                         type = contact.type,
@@ -220,7 +218,7 @@ class ClientController(
 
             client.contacts?.map { contact -> contactRepository.delete(contact) }
 
-            val contactEntity = clientRequest.contacts?.map { contact ->
+            val contactEntities = clientRequest.contacts?.map { contact ->
                 contactRepository.save(
                     Contact(
                         type = contact.type,
