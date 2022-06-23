@@ -36,7 +36,7 @@ class ClientController(
     private val clientRepository: ClientRepository,
     private val addressRepository: AddressRepository,
     private val contactRepository: ContactRepository,
-    private val notFoundMessage: String = "Cliente não encontrado!"
+    private val notFoundMessage: String = "Client not found"
 ) {
 
     @PostMapping
