@@ -147,7 +147,8 @@ class ClientController(
                 cpf = clientRequest.cpf,
                 name = clientRequest.name,
                 lastName = clientRequest.lastName,
-                birthDate = clientRequest.birthDate
+                birthDate = clientRequest.birthDate,
+                score = client.score
             )
 
             client.address?.let { address -> addressRepository.delete(address) }
@@ -199,7 +200,8 @@ class ClientController(
                 cpf = clientRequest.cpf,
                 name = clientRequest.name,
                 lastName = clientRequest.lastName,
-                birthDate = clientRequest.birthDate
+                birthDate = clientRequest.birthDate,
+                score = client.score
             )
 
             client.address?.let { address -> addressRepository.delete(address) }
