@@ -2,14 +2,15 @@ package br.com.creditas.credit_analysis.models
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import org.hibernate.annotations.DynamicUpdate
+import java.time.LocalDate
 import java.util.UUID
-import java.util.Date
 import javax.persistence.Entity
 import javax.persistence.Table
 import javax.persistence.Id
 import javax.persistence.Column
 import javax.persistence.OneToOne
 import javax.persistence.OneToMany
+import kotlin.collections.ArrayList
 
 
 @Entity
@@ -29,7 +30,7 @@ data class ClientPF(
     val lastName: String,
 
     @Column(name = "birth_date")
-    val birthDate: Date,
+    val birthDate: LocalDate,
 
     @OneToOne(mappedBy = "client")
     @JsonManagedReference
