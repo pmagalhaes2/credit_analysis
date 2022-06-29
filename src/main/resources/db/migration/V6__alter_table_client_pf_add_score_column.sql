@@ -1,0 +1,2 @@
+ALTER TABLE client_pf
+    ADD COLUMN score VARCHAR(4)
