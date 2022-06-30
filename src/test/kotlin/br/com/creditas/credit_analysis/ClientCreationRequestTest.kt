@@ -121,7 +121,7 @@ class ClientCreationRequestTest {
     }
 
     @Test
-    fun `should not create a customer if the lastname does not contain only letters, diacritics and whitespace separators`() {
+    fun `should not create a customer if the lastname is invalid`() {
         val newClient = ClientCreationRequest(
             cpf = "74638799094",
             name = "Rúbia",
