@@ -80,6 +80,7 @@ class ClientController(
             name = savedClient.name,
             lastName = savedClient.lastName,
             birthDate = savedClient.birthDate,
+            score = savedClient.score,
             address = addressEntity?.let { address ->
                 AddressDto(
                     cep = addressEntity.cep,
