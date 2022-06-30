@@ -32,6 +32,9 @@ data class ClientPF(
     @Column(name = "birth_date")
     val birthDate: LocalDate,
 
+    @Column(name = "score")
+    val score: Int = (0..1000).random(),
+
     @OneToOne(mappedBy = "client")
     @JsonManagedReference
     val address: Address? = null,
