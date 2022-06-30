@@ -1,2 +1,2 @@
 ALTER TABLE client_pf
-    ADD COLUMN score VARCHAR(4)
+    ADD COLUMN score INTEGER
