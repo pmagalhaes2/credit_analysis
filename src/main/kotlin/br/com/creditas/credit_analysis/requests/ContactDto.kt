@@ -9,7 +9,10 @@ data class ContactDto(
     val type: PhoneType,
 
     @field:Size(min = 11, max = 12)
-    @field:Pattern(regexp = "^\\d*\$")
+    @field:Pattern(
+        regexp = "^\\d*\$",
+        message="must match only numbers"
+    )
     val phoneNumber: String,
 
     @field:Email

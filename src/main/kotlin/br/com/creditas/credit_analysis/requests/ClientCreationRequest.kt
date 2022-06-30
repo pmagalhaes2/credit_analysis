@@ -14,11 +14,17 @@ data class ClientCreationRequest(
     val cpf: String,
 
     @field:NotEmpty
-    @field:Pattern(regexp = "^[\\pL\\pM\\p{Zs}]+\$")
+    @field:Pattern(
+        regexp = "^[\\pL\\pM\\p{Zs}]+\$",
+        message = "must match only letters, diacritics, and whitespace separators"
+    )
     val name: String,
 
     @field:NotEmpty
-    @field:Pattern(regexp = "^[\\pL\\pM\\p{Zs}]+\$")
+    @field:Pattern(
+        regexp = "^[\\pL\\pM\\p{Zs}]+\$",
+        message = "must match only letters, diacritics, and whitespace separators"
+    )
     val lastName: String,
 
     @JsonFormat(pattern= ("dd/MM/yyyy"), locale = "pt-BR", timezone = "UTC")
