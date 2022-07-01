@@ -15,7 +15,6 @@ import java.time.LocalDate
 import javax.validation.Validation
 import javax.validation.Validator
 
-
 @SpringBootTest
 class ClientCreationRequestTest {
     private lateinit var validator: Validator
