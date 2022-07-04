@@ -1,18 +1,19 @@
+
 # Análise de Crédito
 
-Contexto - Análise de Crédito considerando a pontuação do CPF/CNPJ (PQ)
+Contexto - Análise de Crédito considerando a pontuação do CPF (PQ)
 
 
 ## Projeto a ser desenvolvido
 
-O projeto a ser desenvolvido é uma aplicação que realiza consultas de SCORE com base no CPF/CNPJ informado.
+O projeto a ser desenvolvido é uma aplicação que realiza consultas de SCORE com base no CPF informado.
 
 ## Estrutura do Projeto
 
 Pensando em como deve ser estrutura do lado de **_ClientPF_**, foi criado o esquema abaixo, o qual temos representada a estrutura da classe que será desenvolvida.
 A classe **_br.com.creditas.credit_analysis.models.ClientPF_**, será responsável por ter os atributos e os relacionamentos:
 
-![](https://documents.lucid.app/documents/1b4e0075-9d4c-4add-8986-59a912c457c3/pages/0_0?a=958&x=102&y=159&w=1276&h=453&store=1&accept=image%2F*&auth=LCA%205afe58fba57943ead0b59cdd784647c2997ca683-ts%3D1654264421)
+![](https://documents.lucid.app/documents/1b4e0075-9d4c-4add-8986-59a912c457c3/pages/0_0?a=1218&x=98&y=117&w=1364&h=497&store=1&accept=image%2F*&auth=LCA%20321fb09b598671ff24d83a3cf1db12a611d0886c-ts%3D1656967109)
 
 
 | Atributos  | Type  | Descrição|
@@ -21,9 +22,10 @@ A classe **_br.com.creditas.credit_analysis.models.ClientPF_**, será responsáv
 |  cpf |  String  |  Responsável por armazenar o cadastro de pessoa física (CPF) de cada cliente |
 |  name |  String |  Responsável por armazenar o nome do cliente|
 |  last_name |  String | Responsável por armazenar o sobrenome do cliente |
-|  birth_date | Date  | Responsável por armazenar a data de nascimento do cliente  |
+|  birth_date | LocalDate  | Responsável por armazenar a data de nascimento do cliente  |
+|  score | Int  | Responsável por armazenar a informação de score do cliente  |
 |  address |  Address | Responsável por armazenar as informações de endereço do cliente |
-|  contact |  Contact | Responsável por armazenar as informações de contato do cliente |
+|  contacts |  Contact | Responsável por armazenar as informações de contato do cliente |
 
 
 Todos os clientes poderão executar as seguintes ações:
