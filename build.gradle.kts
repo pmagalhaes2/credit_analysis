@@ -26,7 +26,17 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
+
+	//  Test and lint dependencies
+	testRuntimeOnly("com.h2database:h2")
+	testImplementation("org.amshove.kluent:kluent:1.68")
+	testImplementation("com.ninja-squad:springmockk:2.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.10.0")
+	testImplementation("com.github.tomakehurst:wiremock:2.19.0")
+	testImplementation("com.tngtech.archunit:archunit-junit5-engine:0.14.1")
+	testImplementation("io.zonky.test:embedded-database-spring-test:1.6.3")
+	testImplementation("com.tngtech.archunit:archunit-junit5:0.14.1")
 }
 
 tasks.withType<KotlinCompile> {
