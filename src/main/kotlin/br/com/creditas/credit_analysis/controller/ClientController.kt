@@ -86,7 +86,7 @@ class ClientController(
                     cep = addressEntity.cep,
                     street = addressEntity.street,
                     city = addressEntity.city,
-                    state = addressEntity.state
+                    state = addressEntity.state.uppercase()
                 )
             },
             contacts = contactEntities?.map { contact ->
@@ -159,7 +159,7 @@ class ClientController(
                     Address(
                         street = clientRequest.address.street,
                         city = clientRequest.address.city,
-                        state = clientRequest.address.state,
+                        state = clientRequest.address.state.uppercase(),
                         cep = clientRequest.address.cep,
                         client = client
                     )
@@ -212,7 +212,7 @@ class ClientController(
                     Address(
                         street = clientRequest.address.street,
                         city = clientRequest.address.city,
-                        state = clientRequest.address.state,
+                        state = clientRequest.address.state.uppercase(),
                         cep = clientRequest.address.cep,
                         client = client
                     )
