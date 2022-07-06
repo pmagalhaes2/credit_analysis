@@ -1,6 +1,7 @@
 package br.com.creditas.credit_analysis.controller
 
 import br.com.creditas.credit_analysis.exceptions.NotFoundException
+import br.com.creditas.credit_analysis.gateway.RandomScoreGateway
 import br.com.creditas.credit_analysis.models.Address
 import br.com.creditas.credit_analysis.models.ClientPF
 import br.com.creditas.credit_analysis.models.Contact
@@ -36,7 +37,8 @@ class ClientController(
     private val clientRepository: ClientRepository,
     private val addressRepository: AddressRepository,
     private val contactRepository: ContactRepository,
-    private val notFoundMessage: String = "Client not found"
+    private val notFoundMessage: String = "Client not found",
+    private val randomScoreGateway: RandomScoreGateway
 ) {
 
     @PostMapping
@@ -46,7 +48,8 @@ class ClientController(
             cpf = clientRequest.cpf,
             name = clientRequest.name,
             lastName = clientRequest.lastName,
-            birthDate = clientRequest.birthDate
+            birthDate = clientRequest.birthDate,
+            score = randomScoreGateway.getScore().trim()
         )
 
         val savedClient = clientRepository.save(clientEntity)
