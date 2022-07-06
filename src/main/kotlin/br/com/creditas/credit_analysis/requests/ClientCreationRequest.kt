@@ -30,8 +30,6 @@ data class ClientCreationRequest(
     @JsonFormat(pattern= ("dd/MM/yyyy"), locale = "pt-BR", timezone = "UTC")
     val birthDate: LocalDate,
 
-    val score: Int,
-
     @field:Valid
     val address: AddressDto? = null,
 
