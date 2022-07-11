@@ -32,7 +32,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -53,7 +52,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -79,7 +77,6 @@ class ClientCreationRequestTest {
             name = "Rúbia 123",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -100,7 +97,6 @@ class ClientCreationRequestTest {
             name = "",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -126,7 +122,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves 123",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -147,7 +142,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -173,7 +167,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário 1",
                 city = "São Paulo",
@@ -194,7 +187,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo 1",
@@ -215,7 +207,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -236,7 +227,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -262,7 +252,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -284,7 +273,6 @@ class ClientCreationRequestTest {
                 name = "Rúbia",
                 lastName = "Gonçalves",
                 birthDate = LocalDate.now(),
-                score = 0,
                 address = AddressDto(
                     street = "Rua Canário",
                     city = "São Paulo",
@@ -309,7 +297,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -336,7 +323,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
@@ -368,7 +354,6 @@ class ClientCreationRequestTest {
             name = "Rúbia",
             lastName = "Gonçalves",
             birthDate = LocalDate.now(),
-            score = 0,
             address = AddressDto(
                 street = "Rua Canário",
                 city = "São Paulo",
