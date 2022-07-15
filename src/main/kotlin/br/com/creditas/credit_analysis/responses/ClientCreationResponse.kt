@@ -11,7 +11,7 @@ data class ClientCreationResponse(
     val name: String,
     val lastName: String,
     val birthDate: LocalDate,
-    val score: String,
+    val score: Int,
     val address: AddressDto?,
     val contacts: List<ContactDto>?
 )

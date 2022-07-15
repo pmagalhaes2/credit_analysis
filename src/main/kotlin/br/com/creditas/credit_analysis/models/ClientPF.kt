@@ -33,7 +33,7 @@ data class ClientPF(
     val birthDate: LocalDate,
 
     @Column(name = "score")
-    val score: String,
+    val score: Int,
 
     @OneToOne(mappedBy = "client")
     @JsonManagedReference

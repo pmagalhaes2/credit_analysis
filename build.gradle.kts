@@ -26,10 +26,11 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
 
 	//  Test and lint dependencies
-	testRuntimeOnly("com.h2database:h2")
+	testImplementation("org.postgresql:postgresql")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.amshove.kluent:kluent:1.68")
 	testImplementation("com.ninja-squad:springmockk:2.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
