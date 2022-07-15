@@ -49,7 +49,7 @@ class ClientController(
             name = clientRequest.name,
             lastName = clientRequest.lastName,
             birthDate = clientRequest.birthDate,
-            score = randomScoreGateway.getScore().trim()
+            score = randomScoreGateway.getScore().trim().toInt()
         )
 
         val savedClient = clientRepository.save(clientEntity)
@@ -93,12 +93,12 @@ class ClientController(
                 )
             },
             contacts = contactEntities?.map { contact ->
-                    ContactDto(
-                        type = contact.type,
-                        phoneNumber = contact.phoneNumber,
-                        email = contact.emailAddress
-                    )
-                }
+                ContactDto(
+                    type = contact.type,
+                    phoneNumber = contact.phoneNumber,
+                    email = contact.emailAddress
+                )
+            }
         )
         return response
     }
