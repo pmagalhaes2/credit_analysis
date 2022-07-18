@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest
 
 @RestControllerAdvice
 class ExceptionHandler {
-    @ExceptionHandler(NotFoundException::class)
+    @ExceptionHandler(ClientNotFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNotFound(
-        exception: NotFoundException,
+        exception: ClientNotFoundException,
         request: HttpServletRequest
     ): ErrorView {
         return ErrorView(
