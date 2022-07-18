@@ -1,6 +1,6 @@
 package br.com.creditas.credit_analysis.controller
 
-import br.com.creditas.credit_analysis.exceptions.NotFoundException
+import br.com.creditas.credit_analysis.exceptions.ClientNotFoundException
 import br.com.creditas.credit_analysis.gateway.RandomScoreGateway
 import br.com.creditas.credit_analysis.models.Address
 import br.com.creditas.credit_analysis.models.ClientPF
@@ -37,10 +37,10 @@ class ClientController(
     private val clientRepository: ClientRepository,
     private val addressRepository: AddressRepository,
     private val contactRepository: ContactRepository,
-    private val notFoundMessage: String = "Client not found",
     private val randomScoreGateway: RandomScoreGateway
 ) {
 
+    private var message = "client not found"
     @PostMapping
     @Transactional
     fun create(@RequestBody @Valid clientRequest: ClientCreationRequest): ClientCreationResponse {
@@ -123,7 +123,7 @@ class ClientController(
     fun deleteClient(@PathVariable id: UUID) {
         clientRepository.findByid(id)?. let {
             clientRepository.deleteById(id)
-        } ?: throw NotFoundException(notFoundMessage)
+        } ?: throw ClientNotFoundException(message)
     }
 
     @DeleteMapping("/delete")
@@ -132,7 +132,7 @@ class ClientController(
     fun deleteClientByCpf(@RequestParam cpf: String) {
         clientRepository.findByCpf(cpf)?. let {
             clientRepository.deleteByCpf(cpf)
-        } ?: throw NotFoundException(notFoundMessage)
+        } ?: throw ClientNotFoundException(message)
     }
 
     @PutMapping("/{id}")
@@ -184,7 +184,7 @@ class ClientController(
 
             return clientRepository.save(clientEntity)
 
-        } ?: throw NotFoundException(notFoundMessage)
+        } ?: throw ClientNotFoundException(message)
     }
 
 
@@ -237,6 +237,6 @@ class ClientController(
 
             return clientRepository.save(clientEntity)
 
-        } ?: throw NotFoundException(notFoundMessage)
+        } ?: throw ClientNotFoundException(message)
     }
 }
