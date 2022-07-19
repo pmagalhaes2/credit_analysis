@@ -108,13 +108,15 @@ class ClientController(
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: UUID): ResponseEntity<ClientPF> {
-        return ResponseEntity.ok(clientRepository.findByid(id))
+        return ResponseEntity.ok(clientRepository.findByid(id)
+                ?: throw ClientNotFoundException(message))
     }
 
     @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
     fun getByCpf(@RequestParam cpf: String): ClientPF? {
         return clientRepository.findByCpf(cpf)
+                ?: throw ClientNotFoundException(message)
     }
 
     @DeleteMapping("/{id}")
