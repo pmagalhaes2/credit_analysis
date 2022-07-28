@@ -1,9 +1,6 @@
-package br.com.creditas.credit_analysis
+package br.com.creditas.credit_analysis.requests
 
 import br.com.creditas.credit_analysis.models.PhoneType
-import br.com.creditas.credit_analysis.requests.AddressDto
-import br.com.creditas.credit_analysis.requests.ClientCreationRequest
-import br.com.creditas.credit_analysis.requests.ContactDto
 import org.amshove.kluent.invoking
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
