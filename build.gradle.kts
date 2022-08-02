@@ -27,18 +27,24 @@ dependencies {
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
+	implementation("org.testcontainers:testcontainers-bom:1.17.3")
+
 
 	//  Test and lint dependencies
-	testImplementation("org.postgresql:postgresql")
+	testRuntimeOnly("com.h2database:h2")
+	testImplementation("org.testcontainers:postgresql:1.16.2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.amshove.kluent:kluent:1.68")
 	testImplementation("com.ninja-squad:springmockk:2.0.0")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.mockk:mockk:1.10.0")
 	testImplementation("com.github.tomakehurst:wiremock:2.19.0")
 	testImplementation("com.tngtech.archunit:archunit-junit5-engine:0.14.1")
 	testImplementation("io.zonky.test:embedded-database-spring-test:1.6.3")
 	testImplementation("com.tngtech.archunit:archunit-junit5:0.14.1")
+	testImplementation ("org.testcontainers:junit-jupiter:1.17.3")
+	implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation ("org.springframework.boot:spring-boot-starter-web")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
 }
 
 tasks.withType<KotlinCompile> {
