@@ -13,6 +13,8 @@ import br.com.creditas.credit_analysis.requests.ClientCreationRequest
 import br.com.creditas.credit_analysis.requests.ClientUpdateRequest
 import br.com.creditas.credit_analysis.requests.ContactDto
 import br.com.creditas.credit_analysis.responses.ClientCreationResponse
+import io.swagger.annotations.ApiOperation
+import org.springframework.context.annotation.Description
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.RestController
@@ -41,6 +43,9 @@ class ClientController(
 ) {
 
     private var message = "client not found"
+
+    @ApiOperation(value = "Register a new customer",
+            notes = "This method creates a new customer")
     @PostMapping
     @Transactional
     fun create(@RequestBody @Valid clientRequest: ClientCreationRequest): ClientCreationResponse {
@@ -103,15 +108,21 @@ class ClientController(
         return response
     }
 
+    @ApiOperation(value = "Get customers",
+            notes = "This method return a list of registered customers")
     @GetMapping
     fun read() = ResponseEntity.ok(clientRepository.findAll())
 
+    @ApiOperation(value = "Get client by id",
+            notes = "This method return a client by its id")
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<ClientPF> {
+    fun getById(@PathVariable id: UUID)  : ResponseEntity<ClientPF> {
         return ResponseEntity.ok(clientRepository.findByid(id)
                 ?: throw ClientNotFoundException(message))
     }
 
+    @ApiOperation(value = "Get client by cpf",
+            notes = "This method return a client by its cpf")
     @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
     fun getByCpf(@RequestParam cpf: String): ClientPF? {
@@ -119,24 +130,30 @@ class ClientController(
                 ?: throw ClientNotFoundException(message)
     }
 
+    @ApiOperation(value = "Delete client by id",
+            notes = "This method delete a client by its id")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClient(@PathVariable id: UUID) {
-        clientRepository.findByid(id)?. let {
+        clientRepository.findByid(id)?.let {
             clientRepository.deleteById(id)
         } ?: throw ClientNotFoundException(message)
     }
 
+    @ApiOperation(value = "Delete client by cpf",
+            notes = "This method delete a client by its cpf")
     @DeleteMapping("/delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
     fun deleteClientByCpf(@RequestParam cpf: String) {
-        clientRepository.findByCpf(cpf)?. let {
+        clientRepository.findByCpf(cpf)?.let {
             clientRepository.deleteByCpf(cpf)
         } ?: throw ClientNotFoundException(message)
     }
 
+    @ApiOperation(value = "Update client by id",
+            notes = "This method update a client by its id")
     @PutMapping("/{id}")
     @Transactional
     fun updateClientById(
@@ -159,7 +176,7 @@ class ClientController(
 
             client.address?.let { address -> addressRepository.delete(address) }
 
-            val addressEntity = clientRequest.address?. let {
+            val addressEntity = clientRequest.address?.let {
                 addressRepository.save(
                     Address(
                         street = clientRequest.address.street,
@@ -190,6 +207,8 @@ class ClientController(
     }
 
 
+    @ApiOperation(value = "Update client by cpf",
+            notes = "This method update a client by its cpf")
     @PutMapping("/update")
     @Transactional
     fun updateClientByCpf(
