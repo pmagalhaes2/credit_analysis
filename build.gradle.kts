@@ -27,7 +27,9 @@ dependencies {
 	implementation ("org.springframework.cloud:spring-cloud-starter-openfeign:3.1.3")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
-	implementation("org.testcontainers:testcontainers-bom:1.17.3")
+	implementation("io.swagger:swagger-annotations:1.5.0")
+	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+	implementation("io.springfox:springfox-swagger2:2.9.2")
 
 
 	//  Test and lint dependencies

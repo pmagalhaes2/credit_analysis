@@ -2,6 +2,10 @@ spring:
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/credit_analysis?user=postgres&password=postgres}
     driver-class-name: org.postgresql.Driver
+    thymeleaf: spring.thymeleaf.prefix=templates:/templates-2/
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
   flyway:
     enabled: true
   jpa:
